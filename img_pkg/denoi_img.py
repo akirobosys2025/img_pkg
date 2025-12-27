@@ -29,9 +29,10 @@ class NoiseFilterNode(Node):
         
         cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
         denoised = cv2.GaussianBlur(cv_image, (5, 5), 0)
-
-        cv2.imshow('Denoise Image', denoised)
-        cv2.waitKey(1)
+        
+        #デバック用
+        #cv2.imshow('Denoise Image', denoised)
+        #cv2.waitKey(1) 
 
         out_msg = self.bridge.cv2_to_imgmsg(denoised, encoding='bgr8')
         out_msg.header = msg.header
@@ -44,7 +45,7 @@ def main():
     node = NoiseFilterNode()
     rclpy.spin(node)
     node.destroy_node()
-    cv2.destroyAllWindows()
+    #cv2.destroyAllWindows()
     rclpy.shutdown()
 
 
