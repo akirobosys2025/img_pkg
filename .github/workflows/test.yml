@@ -1,0 +1,13 @@
+name: test
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    container: ryuichiueda/ubuntu22.04-ros2:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: build and test
+        run: |
+          rsync -av ./ /root/ros2_ws/src/img_pkg/
+          cd /root/ros2_ws
+          bash -xv ./src/img_pkg/test/test.bash /root
